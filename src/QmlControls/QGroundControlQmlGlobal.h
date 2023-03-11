@@ -17,7 +17,6 @@
 #include "AppSettings.h"
 #include "AirspaceManager.h"
 #include "ADSBVehicleManager.h"
-#include "QGCPalette.h"
 #include "QmlUnitsConversion.h"
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
@@ -77,7 +76,7 @@ public:
     Q_PROPERTY(MicrohardManager*    microhardManager        READ    microhardManager        CONSTANT)
     Q_PROPERTY(bool                 microhardSupported      READ    microhardSupported      CONSTANT)
     Q_PROPERTY(bool                 supportsPairing         READ    supportsPairing         CONSTANT)
-    Q_PROPERTY(QGCPalette*          globalPalette           MEMBER  _globalPalette          CONSTANT)   ///< This palette will always return enabled colors
+    Q_PROPERTY(QObject*             globalPalette           READ    globalPalette           CONSTANT)   ///< This palette will always returns enabled colors
     Q_PROPERTY(QmlUnitsConversion*  unitsConversion         READ    unitsConversion         CONSTANT)
     Q_PROPERTY(bool                 singleFirmwareSupport   READ    singleFirmwareSupport   CONSTANT)
     Q_PROPERTY(bool                 singleVehicleSupport    READ    singleVehicleSupport    CONSTANT)
@@ -225,6 +224,9 @@ public:
 
     QString qgcVersion              (void) const;
 
+    QObject* globalPalette          () const { return qgcApp()->getGlobalPalette(); }
+
+
 #if defined(QGC_AIRMAP_ENABLED)
     bool    airmapSupported() { return true; }
 #else
@@ -259,7 +261,6 @@ private:
     TaisyncManager*         _taisyncManager         = nullptr;
     MicrohardManager*       _microhardManager       = nullptr;
     ADSBVehicleManager*     _adsbVehicleManager     = nullptr;
-    QGCPalette*             _globalPalette          = nullptr;
     QmlUnitsConversion      _unitsConversion;
 #if defined(QGC_ENABLE_PAIRING)
     PairingManager*         _pairingManager         = nullptr;

@@ -650,7 +650,6 @@ HEADERS += \
     src/QGCFileDownload.h \
     src/QGCLoggingCategory.h \
     src/QGCMapPalette.h \
-    src/QGCPalette.h \
     src/QGCQGeoCoordinate.h \
     src/QGCTemporaryFile.h \
     src/QGCToolbox.h \
@@ -905,7 +904,6 @@ SOURCES += \
     src/QGCFileDownload.cc \
     src/QGCLoggingCategory.cc \
     src/QGCMapPalette.cc \
-    src/QGCPalette.cc \
     src/QGCQGeoCoordinate.cc \
     src/QGCTemporaryFile.cc \
     src/QGCToolbox.cc \

@@ -10,7 +10,6 @@
 #pragma once
 
 #include "QmlObjectListModel.h"
-#include "QGCPalette.h"
 #include "Fact.h"
 #include "FactMetaData.h"
 #include <QObject>
@@ -78,5 +77,4 @@ private:
     Vehicle*      _vehicle{nullptr};
     QList<QMetaObject::Connection> _uas_connections;
     CommandHistory _history;
-    QGCPalette     _palette;
 };

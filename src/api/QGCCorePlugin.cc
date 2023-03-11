@@ -276,10 +276,14 @@ void QGCCorePlugin::setShowAdvancedUI(bool show)
     }
 }
 
+#if 0
+    // FIXME: Support temporarily disabled while work ongoing for Qt Design Studio support
+
 void QGCCorePlugin::paletteOverride(QString /*colorName*/, QGCPalette::PaletteColorInfo_t& /*colorInfo*/)
 {
 
 }
+#endif
 
 QString QGCCorePlugin::showAdvancedUIMessage() const
 {

@@ -1,0 +1,5 @@
+Module QGroundControl.PaletteColor
+
+QGCPaletteColor             1.0 QGCPaletteColor.qml
+QGCNonThemedPaletteColor    1.0 QGCNonThemedPaletteColor.qml
+QGCSinglePaletteColor       1.0 QGCSinglePaletteColor.qml

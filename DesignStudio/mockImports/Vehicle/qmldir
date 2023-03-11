@@ -1,0 +1,3 @@
+Module QGroundControl.Mock.Vehicle
+
+singleton Vehicle 1.0 Vehicle.qml

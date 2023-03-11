@@ -8,7 +8,6 @@
  ****************************************************************************/
 
 #include "KMLPlanDomDocument.h"
-#include "QGCPalette.h"
 #include "QGCApplication.h"
 #include "MissionCommandTree.h"
 #include "MissionCommandUIInfo.h"
@@ -18,6 +17,7 @@
 
 #include <QDomDocument>
 #include <QStringList>
+#include <QQmlProperty>
 
 const char* KMLPlanDomDocument::_missionLineStyleName =     "MissionLineStyle";
 const char* KMLPlanDomDocument::surveyPolygonStyleName =   "SurveyPolygonStyle";
@@ -132,16 +132,16 @@ void KMLPlanDomDocument::addMission(Vehicle* vehicle, QmlObjectListModel* visual
 
 void KMLPlanDomDocument::_addStyles(void)
 {
-    QGCPalette palette;
+    QObject* globalPalette = qgcApp()->getGlobalPalette();
 
     QDomElement styleElement1 = createElement("Style");
     styleElement1.setAttribute("id", _missionLineStyleName);
     QDomElement lineStyleElement = createElement("LineStyle");
-    addTextElement(lineStyleElement, "color", kmlColorString(palette.mapMissionTrajectory()));
+    addTextElement(lineStyleElement, "color", kmlColorString(qvariant_cast<QColor>(QQmlProperty::read(globalPalette, "mapMissionTrajectory"))));
     addTextElement(lineStyleElement, "width", "4");
     styleElement1.appendChild(lineStyleElement);
 
-    QString kmlSurveyColorString = kmlColorString(palette.surveyPolygonInterior(), 0.5 /* opacity */);
+    QString kmlSurveyColorString = kmlColorString(qvariant_cast<QColor>(QQmlProperty::read(globalPalette, "surveyPolygonInterior")), 0.5 /* opacity */);
     QDomElement styleElement2 = createElement("Style");
     styleElement2.setAttribute("id", surveyPolygonStyleName);
     QDomElement polygonStyleElement = createElement("PolyStyle");

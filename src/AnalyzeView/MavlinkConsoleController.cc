@@ -238,9 +238,9 @@ MavlinkConsoleController::transformLineForRichText(const QString& line) const
     QString ret = line.toHtmlEscaped().replace(" ","&nbsp;").replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
 
     if (ret.startsWith("WARN", Qt::CaseSensitive)) {
-        ret.replace(0, 4, "<font color=\"" + _palette.colorOrange().name() + "\">WARN</font>");
+        ret.replace(0, 4, "<font color=\"orange\">WARN</font>");
     } else if (ret.startsWith("ERROR", Qt::CaseSensitive)) {
-        ret.replace(0, 5, "<font color=\"" + _palette.colorRed().name() + "\">ERROR</font>");
+        ret.replace(0, 5, "<font color=\"red\">ERROR</font>");
     }
 
     return ret;

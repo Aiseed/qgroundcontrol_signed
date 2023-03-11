@@ -19,10 +19,7 @@
 #include <QVector2D>
 #include <QPainter>
 
-#include <QGCPalette.h>
-
 #include "Common.h"
-
 
 namespace GeometryImage {
 
@@ -59,7 +56,6 @@ private:
     QList<ActuatorGeometry> _actuators{};
 
     QList<ImagePosition> _actuatorImagePositions{}; ///< highlighted actuators image positions
-    QGCPalette           _palette;
 };
 
 } // namespace GeometryImage

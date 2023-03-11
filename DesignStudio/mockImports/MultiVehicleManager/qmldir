@@ -1,0 +1,3 @@
+Module QGroundControl.MultiVehicleManager
+
+singleton MultiVehicleManager 1.0 MultiVehicleManager.qml

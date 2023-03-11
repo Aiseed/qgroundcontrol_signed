@@ -22,6 +22,7 @@
 #include <QQuickWindow>
 #include <QQuickImageProvider>
 #include <QQuickStyle>
+#include <QQmlProperty>
 
 #ifdef QGC_ENABLE_BLUETOOTH
 #include <QBluetoothLocalDevice>
@@ -40,7 +41,6 @@
 #include "LinkManager.h"
 #include "UASMessageHandler.h"
 #include "QGCTemporaryFile.h"
-#include "QGCPalette.h"
 #include "QGCMapPalette.h"
 #include "QGCLoggingCategory.h"
 #include "ParameterEditorController.h"
@@ -450,7 +450,6 @@ void QGCApplication::_initCommon()
 
     // Register our Qml objects
 
-    qmlRegisterType<QGCPalette>     ("QGroundControl.Palette", 1, 0, "QGCPalette");
     qmlRegisterType<QGCMapPalette>  ("QGroundControl.Palette", 1, 0, "QGCMapPalette");
 
     qmlRegisterUncreatableType<Vehicle>                 (kQGCVehicle,                       1, 0, "Vehicle",                    kRefOnly);
@@ -728,8 +727,7 @@ void QGCApplication::showCriticalVehicleMessage(const QString& message)
     if (message.startsWith(QStringLiteral("PreArm")) || message.startsWith(QStringLiteral("preflight"), Qt::CaseInsensitive)) {
         return;
     }
-    QObject* rootQmlObject = _rootQmlObject();
-    if (rootQmlObject) {
+    if (_rootQmlObject()) {
         QVariant varReturn;
         QVariant varMessage = QVariant::fromValue(message);
         QMetaObject::invokeMethod(_rootQmlObject(), "showCriticalVehicleMessage", Q_RETURN_ARG(QVariant, varReturn), Q_ARG(QVariant, varMessage));
@@ -745,8 +743,7 @@ void QGCApplication::showAppMessage(const QString& message, const QString& title
 {
     QString dialogTitle = title.isEmpty() ? applicationName() : title;
 
-    QObject* rootQmlObject = _rootQmlObject();
-    if (rootQmlObject) {
+    if (_rootQmlObject()) {
         QVariant varReturn;
         QVariant varMessage = QVariant::fromValue(message);
         QMetaObject::invokeMethod(_rootQmlObject(), "_showMessageDialog", Q_RETURN_ARG(QVariant, varReturn), Q_ARG(QVariant, dialogTitle), Q_ARG(QVariant, varMessage));
@@ -757,6 +754,17 @@ void QGCApplication::showAppMessage(const QString& message, const QString& title
         // UI isn't ready yet
         _delayedAppMessages.append(QPair<QString, QString>(dialogTitle, message));
         QTimer::singleShot(200, this, &QGCApplication::_showDelayedAppMessages);
+    }
+}
+
+QObject* QGCApplication::getGlobalPalette()
+{
+    // Palettes are only available on the Qml side. The main window in qml has one available at globals.globalPalette.
+    if (_rootQmlObject()) {
+        return qvariant_cast<QObject*>(QQmlProperty::read(_rootQmlObject(), "globalPalette"));
+    } else {
+        qWarning() << "Internal Error: QGCApplication::getPaletteColor - No root qml object for getting colors";
+        return nullptr;
     }
 }
 

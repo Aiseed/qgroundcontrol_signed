@@ -8,7 +8,6 @@
  ****************************************************************************/
 
 #include "KMLDomDocument.h"
-#include "QGCPalette.h"
 #include "QGCApplication.h"
 #include "MissionCommandTree.h"
 #include "MissionCommandUIInfo.h"
@@ -50,8 +49,6 @@ QString KMLDomDocument::kmlColorString (const QColor& color, double opacity)
 
 void KMLDomDocument::_addStandardStyles(void)
 {
-    QGCPalette palette;
-
     QDomElement styleElementForBalloon = createElement("Style");
     styleElementForBalloon.setAttribute("id", balloonStyleName);
     QDomElement balloonStyleElement = createElement("BalloonStyle");

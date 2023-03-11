@@ -27,6 +27,12 @@
         <file alias="SubChecklist.qml">src/FlightDisplay/SubChecklist.qml</file>
     </qresource>
     <qresource prefix="/qml">
+        <file alias="QGroundControl/Palette/QGCPalette.qml">src/QmlControls/QGCPalette/QGCPalette.qml</file>
+        <file alias="QGroundControl/Palette/qmldir">src/QmlControls/QGCPalette/qmldir</file>
+        <file alias="QGroundControl/PaletteColor/QGCPaletteColor.qml">src/QmlControls/QGCPaletteColor/QGCPaletteColor.qml</file>
+        <file alias="QGroundControl/PaletteColor/QGCNonThemedPaletteColor.qml">src/QmlControls/QGCPaletteColor/QGCNonThemedPaletteColor.qml</file>
+        <file alias="QGroundControl/PaletteColor/QGCSinglePaletteColor.qml">src/QmlControls/QGCPaletteColor/QGCSinglePaletteColor.qml</file>
+        <file alias="QGroundControl/PaletteColor/qmldir">src/QmlControls/QGCPaletteColor/qmldir</file>
         <file alias="QGroundControl/Controls/HeightIndicator.qml">src/QmlControls/HeightIndicator.qml</file>
         <file alias="QGroundControl/Controls/QGCDynamicObjectManager.qml">src/QmlControls/QGCDynamicObjectManager.qml</file>
         <file alias="QGroundControl/Controls/QGCOptionsComboBox.qml">src/QmlControls/QGCOptionsComboBox.qml</file>

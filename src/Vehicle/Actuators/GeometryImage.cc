@@ -8,8 +8,12 @@
  ****************************************************************************/
 
 #include "GeometryImage.h"
+#include "QGCApplication.h"
+#include "SettingsManager.h"
+#include "AppSettings.h"
 
 #include <QDir>
+#include <QQmlProperty>
 
 #include <array>
 
@@ -254,7 +258,7 @@ QPixmap VehicleGeometryImageProvider::requestPixmap(const QString& id, QSize* si
     const float frameWidth{ 6.f };
     const float rotorFontSize{ rotorDiameter * 0.4f };
     const QColor rotorHighlightColor{ frameArrowColor };
-    const QColor fontColor{ _palette.text() };
+    const QColor fontColor{ qvariant_cast<QColor>(QQmlProperty::read(qgcApp()->getGlobalPalette(), "text")) };
 
     auto iterateMotors = [scale, offsetX, offsetY](const QList<ActuatorGeometry> &actuators,
             std::function<void(const ActuatorGeometry&, QPointF)> draw) {
@@ -304,7 +308,7 @@ QPixmap VehicleGeometryImageProvider::requestPixmap(const QString& id, QSize* si
             arrowColor = counterClockWiseColor;
         }
         arrowColor.setAlpha(255);
-        if (_palette.globalTheme() == QGCPalette::Light) {
+        if (qgcApp()->toolbox()->settingsManager()->appSettings()->indoorPalette()->rawValue().toBool()) {
             arrowColor = arrowColor.darker(200);
         } else {
             arrowColor = arrowColor.lighter(130);

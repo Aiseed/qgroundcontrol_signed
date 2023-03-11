@@ -103,6 +103,8 @@ public:
 
     bool event(QEvent *e) override;
 
+    QObject* getGlobalPalette();
+
     static QString cachedParameterMetaDataFile(void);
     static QString cachedAirframeMetaDataFile(void);
 

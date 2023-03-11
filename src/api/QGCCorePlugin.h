@@ -10,7 +10,6 @@
 #pragma once
 
 #include "QGCToolbox.h"
-#include "QGCPalette.h"
 #include "QGCMAVLink.h"
 #include "QmlObjectListModel.h"
 
@@ -101,8 +100,12 @@ public:
     /// @return An instance of an alternate position source (or NULL if not available)
     virtual QGeoPositionInfoSource* createPositionSource(QObject* /*parent*/) { return nullptr; }
 
+#if 0
+    // FIXME: Support temporarily disabled while work ongoing for Qt Design Studio support
+
     /// Allows a plugin to override the specified color name from the palette
     virtual void paletteOverride(QString colorName, QGCPalette::PaletteColorInfo_t& colorInfo);
+#endif
 
     virtual void factValueGridCreateDefaultSettings(const QString& defaultSettingsGroup);
 

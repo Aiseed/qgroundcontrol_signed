@@ -8,7 +8,6 @@
  ****************************************************************************/
 
 #include "AppSettings.h"
-#include "QGCPalette.h"
 #include "QGCApplication.h"
 #include "ParameterManager.h"
 
@@ -52,7 +51,6 @@ QList<int> AppSettings::_rgPartialLanguages = {
 DECLARE_SETTINGGROUP(App, "")
 {
     qmlRegisterUncreatableType<AppSettings>("QGroundControl.SettingsManager", 1, 0, "AppSettings", "Reference only");
-    QGCPalette::setGlobalTheme(indoorPalette()->rawValue().toBool() ? QGCPalette::Dark : QGCPalette::Light);
 
     QSettings settings;
 
@@ -148,15 +146,7 @@ DECLARE_SETTINGSFACT(AppSettings, saveCsvTelemetry)
 DECLARE_SETTINGSFACT(AppSettings, firstRunPromptIdsShown)
 DECLARE_SETTINGSFACT(AppSettings, forwardMavlink)
 DECLARE_SETTINGSFACT(AppSettings, forwardMavlinkHostName)
-
-DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, indoorPalette)
-{
-    if (!_indoorPaletteFact) {
-        _indoorPaletteFact = _createSettingsFact(indoorPaletteName);
-        connect(_indoorPaletteFact, &Fact::rawValueChanged, this, &AppSettings::_indoorPaletteChanged);
-    }
-    return _indoorPaletteFact;
-}
+DECLARE_SETTINGSFACT(AppSettings, indoorPalette)
 
 DECLARE_SETTINGSFACT_NO_FUNC(AppSettings, qLocaleLanguage)
 {
@@ -218,11 +208,6 @@ void AppSettings::_checkSavePathDirectories(void)
         savePathDir.mkdir(photoDirectory);
         savePathDir.mkdir(crashDirectory);
     }
-}
-
-void AppSettings::_indoorPaletteChanged(void)
-{
-    QGCPalette::setGlobalTheme(indoorPalette()->rawValue().toBool() ? QGCPalette::Dark : QGCPalette::Light);
 }
 
 QString AppSettings::missionSavePath(void)

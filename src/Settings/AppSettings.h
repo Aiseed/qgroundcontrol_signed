@@ -131,7 +131,6 @@ signals:
     void savePathsChanged();
 
 private slots:
-    void _indoorPaletteChanged();
     void _checkSavePathDirectories();
     void _qLocaleLanguageChanged();
 

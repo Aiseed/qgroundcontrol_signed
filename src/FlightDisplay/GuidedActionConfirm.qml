@@ -110,7 +110,7 @@ Rectangle {
 
             SliderSwitch {
                 id:                 slider
-                confirmText:        qsTr("Slide or hold spacebar")
+                confirmText:        ScreenTools.isMobile ? qsTr("Slide to confirm") : qsTr("Slide or hold spacebar")
                 Layout.fillWidth:   true
 
                 onAccept: {

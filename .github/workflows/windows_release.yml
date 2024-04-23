@@ -30,7 +30,7 @@ jobs:
           version:      ${{ env.QT_VERSION }}
           host:         windows
           target:       desktop
-          arch:         win32_msvc2015
+          arch:         win32_msvc2013
           dir:          ${{ runner.temp }}
           modules:      qtcharts
           setup-python: false

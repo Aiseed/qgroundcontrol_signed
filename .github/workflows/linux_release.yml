@@ -9,7 +9,7 @@ defaults:
 
 env:
   SOURCE_DIR:   ${{ github.workspace }}
-  QT_VERSION:   5.15.2
+  QT_VERSION:   5.9.5
   ARTIFACT:     QGroundControl.AppImage
   BUILD_TYPE:   StableBuild
 
@@ -24,10 +24,6 @@ jobs:
           ref: PC_Version
           submodules: recursive
 
-      - name: Get all tags for correct version determination
-        working-directory:  ${{ github.workspace }}
-        run: |
-          git fetch --all --tags -f --depth 1
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
